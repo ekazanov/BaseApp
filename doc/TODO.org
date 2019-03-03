@@ -1,0 +1,10 @@
+* Development
+** DONE Add to the base_app.multiprocess.main.BaseAppMultiprocessMain.workers array - Subprocesses to be run by main.
+** TODO Add to the base_app.multiprocess.main.BaseAppMultiprocessMain.workers_to_check_array - Subprocesses to be checked and restarted by main.
+** TODO Add base_app.multiprocess.main.BaseAppMultiprocessMain.in_queue for the input messages
+** TODO Add worker class
+** TODO Add input queue to worker class
+** TODO Add keyboard interrupt processing
+** TODO Add worker name
+* Documentation
+** TODO Add HISTORY.org file
