@@ -1,9 +1,12 @@
 * Development
 ** DONE Add to the base_app.multiprocess.main.BaseAppMultiprocessMain.workers array - Subprocesses to be run by main.
-** TODO Add to the base_app.multiprocess.main.BaseAppMultiprocessMain.workers_to_check_array - Subprocesses to be checked and restarted by main.
-** TODO Add base_app.multiprocess.main.BaseAppMultiprocessMain.in_queue for the input messages
-** TODO Add worker class
-** TODO Add input queue to worker class
+** DONE Add to the base_app.multiprocess.main.BaseAppMultiprocessMain.workers_to_check_array - Subprocesses to be checked and restarted by main.
+** DONE Add base_app.multiprocess.main.BaseAppMultiprocessMain.in_queue for the input messages
+** DONE Add base_app.multiprocess.main.BaseAppMultiprocessWorker.in_queue for the input messages
+** DONE Add worker class
+** DONE [2019-03-14 Thu] Add input queue to worker class
+** DONE [2019-03-14 Thu] Add input queue to main class
+** TODO Develop Message dispatcher class
 ** TODO Add keyboard interrupt processing
 ** TODO Add worker name
 * Documentation
