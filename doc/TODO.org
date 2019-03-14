@@ -6,7 +6,11 @@
 ** DONE Add worker class
 ** DONE [2019-03-14 Thu] Add input queue to worker class
 ** DONE [2019-03-14 Thu] Add input queue to main class
-** TODO Develop Message dispatcher class
+** DONE [2019-03-14 Thu] Develop Message dispatcher class
+** DONE [2019-03-14 Thu] Develop BaseAppMessageRouter class
+** TODO Add in_queue argument to BaseAppMessageRouter class (it will get messages from the queue itself)
+** TODO Add BaseAppMessageRouter to BaseAppMultiprocessMain
+** TODO Add BaseAppMessageRouter to .BaseAppMultiprocessWorker
 ** TODO Add keyboard interrupt processing
 ** TODO Add worker name
 * Documentation
