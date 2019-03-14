@@ -11,7 +11,7 @@
 ** TODO Add in_queue argument to BaseAppMessageRouter class (it will get messages from the queue itself)
 ** TODO Add BaseAppMessageRouter to BaseAppMultiprocessMain
 ** TODO Add BaseAppMessageRouter to .BaseAppMultiprocessWorker
-** TODO Add keyboard interrupt processing
-** TODO Add worker name
+** TODO Add Keyboard interrupt processing
+** TODO Add application switching off code
 * Documentation
 ** TODO Add HISTORY.org file
