@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Example for the BaseApp multiprocess application.
+The BaseApp multiprocess application example.
 """
 from __future__ import print_function
 

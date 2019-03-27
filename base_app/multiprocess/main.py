@@ -25,7 +25,7 @@ class BaseAppMultiprocessMain(object):
         if check:
             self.worker_to_check_arr.append(worker)
         return
-        
+
     def run(self):
         print("Hello world")
         self._run_workers()
@@ -43,7 +43,7 @@ class BaseAppMultiprocessMain(object):
             time.sleep(self.main_loop_sleep_time)
         return
 
-    
+
 if __name__ == "__main__":
     main = BaseAppMultiprocessMain()
     main.run()
