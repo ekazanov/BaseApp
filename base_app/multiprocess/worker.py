@@ -7,8 +7,9 @@ from __future__ import print_function
 __author__ = "Evgeny Kazanov"
 
 from multiprocessing import Process
-from multiprocessing import Queue
 import time
+
+from message_router import BaseAppMessageRouter
 
 class BaseAppMultiprocessWorker(object):
 
@@ -16,7 +17,7 @@ class BaseAppMultiprocessWorker(object):
         self.main_loop_sleep_time = 0.01
         self.proc = None
         self.name = name
-        self.input_q = Queue()
+        self.msg_router = BaseAppMessageRouter()
         self.main_input_q = main_input_q
         
     def run_worker(self):

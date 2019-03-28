@@ -10,7 +10,8 @@ __author__ = "Evgeny Kazanov"
 
 import time
 
-from multiprocessing import Queue
+from message_router import BaseAppMessageRouter
+
 
 class BaseAppMultiprocessMain(object):
 
@@ -18,7 +19,7 @@ class BaseAppMultiprocessMain(object):
         self.main_loop_sleep_time = 0.01
         self.worker_arr = []
         self.worker_to_check_arr = []
-        self.input_q = Queue()
+        self.msg_router = BaseAppMessageRouter()
 
     def register_worker(self, worker=None, check=False):
         self.worker_arr.append(worker)
