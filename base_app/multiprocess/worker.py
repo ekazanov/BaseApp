@@ -18,10 +18,11 @@ class Worker(object):
         self.proc = None
         self.name = name
         self.msg_receiver = MessageReceiver()
-        self.main_input_q = main_input_q
-        
+        self._exit_flag = False
+        self.msg_receiver.register_handler(message_type="exit",
+                                           message_handler=self._exit)
+
     def run_worker(self):
-        print("BaseAppMultiprocessWorker.run_worker()")
         self.proc = Process(target=self._main_loop)
         self.proc.start()
         return self.proc
@@ -29,9 +30,14 @@ class Worker(object):
     def worker_action(self):
         msg = "Unimplemented method: {}".format(self.__class__+'.'+__name__)
         raise Exception(msg)
-   
+
     def _main_loop(self):
-        while True:
+        while not self._exit_flag:
             self.worker_action()
+            self.msg_receiver.get_messages()
             time.sleep(self.main_loop_sleep_time)
+        return
+
+    def _exit(self, msg_data):
+        self._exit_flag = True
         return

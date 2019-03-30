@@ -35,3 +35,12 @@ class MessageReceiver(object):
         except Empty:
             return (None, None)
         return (msg_type, msg_body)
+
+    def get_messages(self):
+        while True:
+            msg_type, msg_body = self._get_message()
+            if (msg_type, msg_body) == (None, None):
+                break
+            # Execute message handler
+            self.message_handler_d[msg_type](msg_body)
+        return

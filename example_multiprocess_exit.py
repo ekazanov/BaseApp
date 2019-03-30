@@ -7,6 +7,9 @@ from __future__ import print_function
 
 __author__ = "Evgeny Kazanov"
 
+import time
+import threading
+
 from base_app.multiprocess.main import Main
 from base_app.multiprocess.worker import Worker
 
@@ -26,11 +29,16 @@ class UserMain(Main):
         print("UserMain.main_action()")
         return
 
-
 main = UserMain()
 main.main_loop_sleep_time = 0.5
 worker = UserWorker(name='Worker 01')
 main.register_worker(worker=worker, check=False)
 worker = UserWorker(name='Worker 02')
 main.register_worker(worker=worker, check=False)
-main.run()
+
+main_thread = threading.Thread(target=main.run)
+main_thread.start()
+print("--------------------> main() started")
+time.sleep(2)
+print("--------------------> Send exit messages")
+main.exit()

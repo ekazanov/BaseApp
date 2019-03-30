@@ -19,7 +19,7 @@ class Main(object):
         self.main_loop_sleep_time = 0.01
         self.worker_arr = []
         self.worker_to_check_arr = []
-        self.msg_rreceiver = MessageReceiver()
+        self.msg_receiver = MessageReceiver()
 
     def register_worker(self, worker=None, check=False):
         self.worker_arr.append(worker)
@@ -38,13 +38,27 @@ class Main(object):
             worker.run_worker()
         return
 
+    def main_action(self):
+        msg = "Unimplemented method: {}".format(str(self.__class__)+'.'+str(__name__))
+        raise Exception(msg)
+
     def _main_loop(self):
         while True:
-            print("BaseAppMultiprocessMain._main_loop()")
+            self.main_action()
             time.sleep(self.main_loop_sleep_time)
         return
 
+    def exit(self):
+        # send exit message to workers
+        for worker in self.worker_arr:
+            self.send_exit_msg(worker)
+        return
 
+    def send_exit_msg(self, worker):
+        msg = ("exit", None)
+        worker.msg_receiver.in_q.put(msg)
+        return
+    
 if __name__ == "__main__":
-    main = BaseAppMultiprocessMain()
+    main = Main()
     main.run()
