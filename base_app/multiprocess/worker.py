@@ -9,15 +9,15 @@ __author__ = "Evgeny Kazanov"
 from multiprocessing import Process
 import time
 
-from message_router import BaseAppMessageRouter
+from message_receiver import MessageReceiver
 
-class BaseAppMultiprocessWorker(object):
+class Worker(object):
 
     def __init__(self, name=None, main_input_q=None):
         self.main_loop_sleep_time = 0.01
         self.proc = None
         self.name = name
-        self.msg_router = BaseAppMessageRouter()
+        self.msg_receiver = MessageReceiver()
         self.main_input_q = main_input_q
         
     def run_worker(self):

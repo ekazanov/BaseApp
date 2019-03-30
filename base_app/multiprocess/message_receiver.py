@@ -7,7 +7,7 @@ TODO: Not tested.
 from multiprocessing import Queue
 from Queue import Empty
 
-class BaseAppMessageRouter(object):
+class MessageReceiver(object):
     """
     Message format:
         ["<msg_type>", <msg_body>]

@@ -10,16 +10,16 @@ __author__ = "Evgeny Kazanov"
 
 import time
 
-from message_router import BaseAppMessageRouter
+from message_receiver import MessageReceiver
 
 
-class BaseAppMultiprocessMain(object):
+class Main(object):
 
     def __init__(self):
         self.main_loop_sleep_time = 0.01
         self.worker_arr = []
         self.worker_to_check_arr = []
-        self.msg_router = BaseAppMessageRouter()
+        self.msg_rreceiver = MessageReceiver()
 
     def register_worker(self, worker=None, check=False):
         self.worker_arr.append(worker)
