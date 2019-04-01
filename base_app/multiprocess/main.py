@@ -46,9 +46,12 @@ class Main(object):
     def _main_loop(self):
         while True:
             self.main_action()
-            if self.exit_signal_receiver:
+            if self.exit_signal_receiver.exit_flag:
                 break
             time.sleep(self.main_loop_sleep_time)
+            self.exit()
+        for worker in self.worker_arr:
+            worker.proc.join()
         return
 
     def exit(self):
