@@ -43,6 +43,7 @@ def run_base_app_mutiprocess_app():
     main.run()
     return
 
+print("Start Main() process for the SIGINT testing.")
 MAIN_PROCESS = Process(target=run_base_app_mutiprocess_app)
 MAIN_PROCESS.start()
 MAIN_PROCESS_PID = MAIN_PROCESS.pid
@@ -52,10 +53,12 @@ time.sleep(2)
 print("Send SIGINT signal to main process. PID={}".format(MAIN_PROCESS_PID))
 os.kill(MAIN_PROCESS_PID, signal.SIGINT)
 
+print("Start Main() process for the SIGTERM testing.")
+MAIN_PROCESS = Process(target=run_base_app_mutiprocess_app)
+MAIN_PROCESS.start()
+MAIN_PROCESS_PID = MAIN_PROCESS.pid
+print("MAIN_PROCESS_PID = {}".format(MAIN_PROCESS_PID))
 
-# main_thread = threading.Thread(target=main.run_base_app_mutiprocess_app)
-# main_thread.start()
-# print("--------------------> main() started")
-# time.sleep(2)
-# print("--------------------> Send exit messages")
-# main.exit()
+time.sleep(2)
+print("Send SIGTERM signal to main process. PID={}".format(MAIN_PROCESS_PID))
+os.kill(MAIN_PROCESS_PID, signal.SIGTERM)
