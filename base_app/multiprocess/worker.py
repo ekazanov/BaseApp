@@ -1,5 +1,5 @@
 """
-Project: BaseApp. Class: BaseAppMain.
+Project: BaseApp. Class: Worker.
 
 """
 from __future__ import print_function
@@ -9,6 +9,7 @@ __author__ = "Evgeny Kazanov"
 from multiprocessing import Process
 import time
 
+from signal_utils import ignore_sigint
 from message_receiver import MessageReceiver
 
 class Worker(object):
@@ -32,6 +33,7 @@ class Worker(object):
         raise Exception(msg)
 
     def _main_loop(self):
+        ignore_sigint()
         while not self._exit_flag:
             self.worker_action()
             self.msg_receiver.get_messages()
