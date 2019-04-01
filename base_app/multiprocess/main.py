@@ -11,7 +11,7 @@ __author__ = "Evgeny Kazanov"
 import time
 
 from message_receiver import MessageReceiver
-
+from signal_utils import ExitSignalReceiver
 
 class Main(object):
 
@@ -20,6 +20,7 @@ class Main(object):
         self.worker_arr = []
         self.worker_to_check_arr = []
         self.msg_receiver = MessageReceiver()
+        self.exit_signal_receiver = ExitSignalReceiver()
 
     def register_worker(self, worker=None, check=False):
         self.worker_arr.append(worker)
@@ -45,6 +46,8 @@ class Main(object):
     def _main_loop(self):
         while True:
             self.main_action()
+            if self.exit_signal_receiver:
+                break
             time.sleep(self.main_loop_sleep_time)
         return
 
