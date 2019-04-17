@@ -21,6 +21,7 @@ class Main(object):
         self.worker_to_check_arr = []
         self.msg_receiver = MessageReceiver()
         self.exit_signal_receiver = ExitSignalReceiver()
+        self._exit_flag = False
 
     def register_worker(self, worker=None, check=False):
         self.worker_arr.append(worker)
@@ -46,15 +47,19 @@ class Main(object):
     def _main_loop(self):
         while True:
             self.main_action()
+            # Exit by signal
             if self.exit_signal_receiver.exit_flag:
                 break
+            # Exit by exit() call
+            if self._exit_flag:
+                break
             time.sleep(self.main_loop_sleep_time)
-            self.exit()
+        self._exit_workers()
         for worker in self.worker_arr:
             worker.proc.join()
         return
 
-    def exit(self):
+    def _exit_workers(self):
         # send exit message to workers
         for worker in self.worker_arr:
             self.send_exit_msg(worker)
@@ -63,6 +68,12 @@ class Main(object):
     def send_exit_msg(self, worker):
         msg = ("exit", None)
         worker.msg_receiver.in_q.put(msg)
+        return
+
+    def exit(self):
+        """Exit the application.
+        """
+        self._exit_flag = True
         return
     
 if __name__ == "__main__":
