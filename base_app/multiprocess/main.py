@@ -30,7 +30,6 @@ class Main(object):
         return
 
     def run(self):
-        print("Hello world")
         self._run_workers()
         self._main_loop()
         return

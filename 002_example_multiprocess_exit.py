@@ -3,7 +3,7 @@
 """
 The BaseApp multiprocess application example.
 
-1. Create an application classes.
+1. Create the application classes.
 
 2. Run application as a separate thread.
 
