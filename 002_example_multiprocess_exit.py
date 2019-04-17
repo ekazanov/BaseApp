@@ -2,6 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 The BaseApp multiprocess application example.
+
+1. Create an application classes.
+
+2. Run application as a separate thread.
+
+3. sleep(2) and call exit()
+
+4. The appliaction has to exit.
+
 """
 from __future__ import print_function
 
