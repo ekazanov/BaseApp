@@ -10,10 +10,19 @@ process and two workers.
 2.3. The process has to exit.
 
 3.1. Start a run_base_app_mutiprocess_app() function as a separate process.
-3.2. After 2 seconds send SIGTERM signal to the process.
+3.2. After 2 seconds send SIGTERM signal to the proceses.
 3.3. The application process has to exit.
 """
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+The BaseApp multiprocess application example.
 
+1. Create MAIN_PROCESS process. Send SIGINT signal to MAIN_PROCESS.
+
+2. Create MAIN_PROCESS process. Send SIGTERM signal to MAIN_PROCESS.
+
+"""
 from __future__ import print_function
 
 __author__ = "Evgeny Kazanov"
