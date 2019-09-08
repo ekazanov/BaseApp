@@ -12,6 +12,7 @@ import time
 
 from message_receiver import MessageReceiver
 from signal_utils import ExitSignalReceiver
+from message_utils import send_message
 
 class Main(object):
 
