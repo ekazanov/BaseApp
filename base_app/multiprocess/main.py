@@ -15,17 +15,19 @@ from signal_utils import ExitSignalReceiver
 
 class Main(object):
 
-    def __init__(self):
+    def __init__(self, check_workers=False):
         self.main_loop_sleep_time = 0.01
         self.worker_arr = []
         self.worker_to_check_arr = []
+        self.check_workers = check_workers
         self.msg_receiver = MessageReceiver()
         self.exit_signal_receiver = ExitSignalReceiver()
         self._exit_flag = False
 
-    def register_worker(self, worker=None, check=False):
+    def register_worker(self, worker=None):
         self.worker_arr.append(worker)
-        if check:
+        worker.set_main_input_q(main_input_q=self.msg_receiver.in_q)
+        if self.check_workers:
             self.worker_to_check_arr.append(worker)
         return
 
