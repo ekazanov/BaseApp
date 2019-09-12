@@ -1,5 +1,5 @@
 """
-Project: BaseApp. Class: BaseAppMessageRouter.
+Project: BaseApp. Class: MessageRouter.
 
 TODO: Not tested.
 """
