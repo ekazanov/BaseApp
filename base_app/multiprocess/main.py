@@ -24,6 +24,7 @@ class Main(object):
         self.msg_receiver = MessageReceiver()
         self.exit_signal_receiver = ExitSignalReceiver()
         self._exit_flag = False
+        self.name = "main"
 
     def register_worker(self, worker=None):
         self.worker_arr.append(worker)
