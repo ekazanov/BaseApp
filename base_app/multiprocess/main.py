@@ -11,6 +11,7 @@ __author__ = "Evgeny Kazanov"
 import time
 
 from message_receiver import MessageReceiver
+from message_router import MessageRouter
 from signal_utils import ExitSignalReceiver
 from message_utils import send_message
 
@@ -22,6 +23,7 @@ class Main(object):
         self.worker_to_check_arr = []
         self.check_workers = check_workers
         self.msg_receiver = MessageReceiver()
+        self.msg_router = MessageRouter()
         self.exit_signal_receiver = ExitSignalReceiver()
         self._exit_flag = False
         self.name = "main"
@@ -29,6 +31,8 @@ class Main(object):
     def register_worker(self, worker=None):
         self.worker_arr.append(worker)
         worker.set_main_input_q(main_input_q=self.msg_receiver.in_q)
+        worker.set_msg_router(self.msg_router)
+        self.msg_router.register_receiving_objets(receiving_object=worker)
         if self.check_workers:
             self.worker_to_check_arr.append(worker)
         return

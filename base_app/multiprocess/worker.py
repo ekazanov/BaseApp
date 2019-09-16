@@ -20,12 +20,20 @@ class Worker(object):
         self.name = name
         self.main_input_q = None
         self.msg_receiver = MessageReceiver()
+        self.msg_router = None
+        """The MessageRouter object is added during the Worker registration in
+        Main class object.
+        """
         self._exit_flag = False
         self.msg_receiver.register_handler(message_type="exit",
                                            message_handler=self._exit)
 
     def set_main_input_q(self, main_input_q=None):
         self.main_input_q = main_input_q
+        return
+
+    def set_msg_router(self, msg_router=None):
+        self.msg_router = msg_router
         return
 
     def run_worker(self):

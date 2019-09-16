@@ -23,7 +23,7 @@ class MessageRouter(object):
         {<receiving_object_name>: <receiving_object>}
         """
 
-    def register_receiving_objetc(self, receiving_object=None):
+    def register_receiving_objets(self, receiving_object=None):
         self.message_route_d[receiving_object.name] = receiving_object
         return
 
