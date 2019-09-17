@@ -27,6 +27,7 @@ class Main(object):
         self.exit_signal_receiver = ExitSignalReceiver()
         self._exit_flag = False
         self.name = "main"
+        self.msg_router.register_receiving_objets(receiving_object=self)
 
     def register_worker(self, worker=None):
         self.worker_arr.append(worker)
@@ -82,7 +83,7 @@ class Main(object):
         """
         self._exit_flag = True
         return
-    
+
 if __name__ == "__main__":
     main = Main()
     main.run()
