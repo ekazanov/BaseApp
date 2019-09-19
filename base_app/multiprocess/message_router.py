@@ -27,10 +27,12 @@ class MessageRouter(object):
         self.message_route_d[receiving_object.name] = receiving_object
         return
 
-    def route_message_to_receiver(self,
-                                  receiving_object_name=None,
-                                  message=None ):
+    def send_message(self,
+                     receiving_object_name=None,
+                     message_type=None,
+                     message_body=None):
         # Send message to receiving_object
         receiving_obj = self.message_route_d[receiving_object_name]
+        message = (message_type, message_body)
         receiving_obj.msg_receiver.in_q.put(message)
         return
