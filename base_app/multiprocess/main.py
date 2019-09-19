@@ -27,13 +27,13 @@ class Main(object):
         self.exit_signal_receiver = ExitSignalReceiver()
         self._exit_flag = False
         self.name = "main"
-        self.msg_router.register_receiving_objets(receiving_object=self)
+        self.msg_router.register_receiving_object(receiving_object=self)
 
     def register_worker(self, worker=None):
         self.worker_arr.append(worker)
         worker.set_main_input_q(main_input_q=self.msg_receiver.in_q)
         worker.set_msg_router(self.msg_router)
-        self.msg_router.register_receiving_objets(receiving_object=worker)
+        self.msg_router.register_receiving_object(receiving_object=worker)
         if self.check_workers:
             self.worker_to_check_arr.append(worker)
         return
