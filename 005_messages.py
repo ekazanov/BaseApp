@@ -12,6 +12,7 @@ from __future__ import print_function
 
 __author__ = "Evgeny Kazanov"
 
+import os
 import sys
 
 from base_app.multiprocess.main import Main
@@ -31,7 +32,8 @@ class UserWorker01(Worker):
         return
 
     def _msg_handl_print_msg(self, msg_body=None):
-        print("Worker: {}. Message: {}".format(self.name, msg_body))
+        print("PID: {}; Worker: {}; Message: {}".format(
+            os.getpid(), self.name, msg_body))
         return
 
 class UserWorker02(Worker):
@@ -48,22 +50,36 @@ class UserWorker02(Worker):
         return
 
     def _msg_handl_print_msg(self, msg_body=None):
-        print("Worker: {}. Message: {}".format(self.name, msg_body))
+        print("PID: {}; Worker: {}; Message: {}".format(
+            os.getpid(), self.name, msg_body))
         return
 
 class UserMain(Main):
 
+    def __init__(self, *args, **kwargs):
+        super(UserMain, self).__init__(*args, **kwargs)
+        
     def main_action(self):
         print("UserMain.main_action()")
         self._send_msg_to_worker_01()
+        self._send_msg_to_worker_02()
         return
 
     def _send_msg_to_worker_01(self):
+        print("Main: Send message from Main to Worker_01")
         self.msg_router.send_message(receiving_object_name="Worker_01",
                                      message_type="print",
                                      message_body="Message from Main to Worker_01")
         return
 
+    def _send_msg_to_worker_02(self):
+        print("Main: Send message from Main to Worker_02")
+        self.msg_router.send_message(receiving_object_name="Worker_02",
+                                     message_type="print",
+                                     message_body="Message from Main to Worker_02")
+        return
+
+    
 main = UserMain()
 main.main_loop_sleep_time = 0.5
 worker = UserWorker01(name='Worker_01')
