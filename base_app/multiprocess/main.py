@@ -74,8 +74,9 @@ class Main(object):
         return
 
     def send_exit_msg(self, worker):
-        msg = ("exit", None)
-        worker.msg_receiver.in_q.put(msg)
+        self.msg_router.send_message(receiving_object_name=worker.name,
+                                     message_type="exit",
+                                     message_body=None)
         return
 
     def exit(self):
