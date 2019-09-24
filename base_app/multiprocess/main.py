@@ -49,7 +49,8 @@ class Main(object):
         return
 
     def main_action(self):
-        msg = "Unimplemented method: {}".format(str(self.__class__)+'.'+str(__name__))
+        msg = "Unimplemented method: {}".format(
+            str(self.__class__)+'.'+str(__name__))
         raise Exception(msg)
 
     def _main_loop(self):
