@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 The BaseApp multiprocess application example.
+Run main class and two workers.
 
-1. Create the application classes.
+1. Create the UserMain class.
 
-2. Run the classes.
+2. Create the UserWorker classes.
 
-3. Exit by the Ctrl-C.
+3. Run the everything.
+
+4. Exit by the Ctrl-C.
 """
 from __future__ import print_function
 
@@ -40,7 +43,7 @@ time.sleep(1)
 main = UserMain()
 main.main_loop_sleep_time = 0.5
 worker = UserWorker(name='Worker 01')
-main.register_worker(worker=worker, check=False)
+main.register_worker(worker=worker)
 worker = UserWorker(name='Worker 02')
-main.register_worker(worker=worker, check=False)
+main.register_worker(worker=worker)
 main.run()

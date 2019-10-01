@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 """The BaseApp multiprocess application example.
+Exit by signal.
 
 1. Create a run_base_app_mutiprocess_app() function which runs a main
 process and two workers.
@@ -47,12 +48,15 @@ def run_base_app_mutiprocess_app():
     main = UserMain()
     main.main_loop_sleep_time = 0.5
     worker = UserWorker(name='Worker 01')
-    main.register_worker(worker=worker, check=False)
+    main.register_worker(worker=worker)
     worker = UserWorker(name='Worker 02')
-    main.register_worker(worker=worker, check=False)
+    main.register_worker(worker=worker)
 
     main.run()
     return
+
+print(__doc__)
+time.sleep(1)
 
 print("Start Main() process for the SIGINT testing.")
 MAIN_PROCESS = Process(target=run_base_app_mutiprocess_app)

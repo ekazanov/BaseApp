@@ -1,12 +1,15 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 """
-"""
+The BaseApp multiprocess application example.
+Run main class and two workers.
 
-# TODO Add message handler to worker
-# TODO Add message sending to worker
-# Add message handler to UserWorker
-# Add message handler to UserMain
+Run main process and two worker processes. 
+
+main process sends messages to workers.
+
+Exit by Ctrl-C.
+"""
 
 from __future__ import print_function
 
@@ -14,6 +17,7 @@ __author__ = "Evgeny Kazanov"
 
 import os
 import sys
+import time
 
 from base_app.multiprocess.main import Main
 from base_app.multiprocess.worker import Worker
@@ -88,7 +92,9 @@ class UserMain(Main):
             message_body="Message from Main to Worker_02")
         return
 
-
+print(__doc__)
+time.sleep(1)
+    
 main = UserMain()
 main.main_loop_sleep_time = 0.1
 worker = UserWorker01(name='Worker_01')

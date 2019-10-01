@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 """
 The BaseApp multiprocess application example.
+Exit by the using Main.exit() method.
 
-1. Create the application classes.
+1. Create the Main/worker classes.
 
-2. Run application as a separate thread.
+2. Run a separate thread for the exit call.
 
 3. sleep(2) and call exit()
 
@@ -38,12 +39,15 @@ class UserMain(Main):
         print("UserMain.main_action()")
         return
 
+print(__doc__)
+time.sleep(1)
+
 main = UserMain()
 main.main_loop_sleep_time = 0.5
 worker = UserWorker(name='Worker 01')
-main.register_worker(worker=worker, check=False)
+main.register_worker(worker=worker)
 worker = UserWorker(name='Worker 02')
-main.register_worker(worker=worker, check=False)
+main.register_worker(worker=worker)
 
 main_thread = threading.Thread(target=main.run)
 main_thread.start()
