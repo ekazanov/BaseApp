@@ -1,8 +1,6 @@
 BaseApp
 =======
 
-Usage: see examples.
-
 # Info #
 
 Author: Evgeny Kazanov
