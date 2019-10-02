@@ -2,6 +2,8 @@
 """
 Project: BaseApp. Class: BaseAppMain.
 
+TODO: remove this function and file.
+
 """
 from __future__ import print_function
 
