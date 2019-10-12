@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 The BaseApp multiprocess application example.
-Exit by the using Main.exit() method.
+Exit using a Main.exit() method.
 
 1. Create the Main/worker classes.
 

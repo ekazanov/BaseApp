@@ -8,7 +8,7 @@ Run main process and two worker processes.
 
 main process sends messages to workers.
 
-Exit by Ctrl-C.
+Exit using Ctrl-C.
 """
 
 from __future__ import print_function
