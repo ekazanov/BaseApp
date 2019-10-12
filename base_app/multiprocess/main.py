@@ -10,10 +10,10 @@ __author__ = "Evgeny Kazanov"
 
 import time
 
-from message_receiver import MessageReceiver
-from message_router import MessageRouter
-from signal_utils import ExitSignalReceiver
-from message_utils import send_message
+from base_app.multiprocess.message_receiver import MessageReceiver
+from base_app.multiprocess.message_router import MessageRouter
+from base_app.multiprocess.signal_utils import ExitSignalReceiver
+
 
 class Main(object):
 

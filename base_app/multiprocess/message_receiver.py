@@ -1,9 +1,14 @@
 """
 Project: BaseApp. Class: MessageRouter.
 """
-
 from multiprocessing import Queue
-from Queue import Empty
+try:
+    # Python2
+    from Queue import Empty
+except ModuleNotFoundError:
+    # Python3
+    from queue import Empty
+
 
 class MessageReceiver(object):
     """

@@ -10,8 +10,8 @@ from multiprocessing import Process
 import os
 import time
 
-from signal_utils import ignore_sigint
-from message_receiver import MessageReceiver
+from base_app.multiprocess.signal_utils import ignore_sigint
+from base_app.multiprocess.message_receiver import MessageReceiver
 
 class Worker(object):
 
