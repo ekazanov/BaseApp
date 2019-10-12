@@ -16,7 +16,7 @@ application.
   * Main process.
   * Worker processes.
   * Messaging system.
-  * Correct signal processing.
+  * Signal processing.
 
 # Classes #
 
@@ -50,5 +50,3 @@ See 004_example_messages.py file.
   * Create the worker objects.
   * Register workers.
   * Call the run() method of the main object.
-  
-#  #

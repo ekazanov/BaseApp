@@ -1,7 +1,5 @@
 """
 Project: BaseApp. Class: MessageRouter.
-
-TODO: Not tested.
 """
 
 from multiprocessing import Queue
