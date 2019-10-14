@@ -43,9 +43,10 @@ class Worker(object):
         return
 
     def run_worker(self):
-        self.proc = Process(target=self._main_loop, args=(
-            self.main_input_q,
-            self.msg_receiver.in_q))
+        args = (self.main_input_q,
+                self.msg_receiver.in_q,
+                self.task_queue.task_queue)
+        self.proc = Process(target=self._main_loop, args=args)
         self.proc.start()
         return self.proc
 
@@ -53,11 +54,12 @@ class Worker(object):
         msg = "Unimplemented method: {}".format(self.__class__+'.'+__name__)
         raise Exception(msg)
 
-    def _main_loop(self, main_input_q, msg_receiver_in_q):
+    def _main_loop(self, main_input_q, msg_receiver_in_q, task_queue):
         ignore_sigint()
         # Redefine queues after a fork
         self.main_input_q = main_input_q
         self.msg_receiver.in_q = msg_receiver_in_q
+        self.task_queue.task_queue = task_queue
         while not self._exit_flag:
             self.worker_action()
             self.msg_receiver.get_messages()
