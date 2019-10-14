@@ -28,6 +28,7 @@ class Worker(object):
         self._exit_flag = False
         self.msg_receiver.register_handler(message_type="exit",
                                            message_handler=self._exit)
+        self.task_queue = None
 
     def set_main_input_q(self, main_input_q=None):
         self.main_input_q = main_input_q
@@ -35,6 +36,10 @@ class Worker(object):
 
     def set_msg_router(self, msg_router=None):
         self.msg_router = msg_router
+        return
+
+    def set_task_queue(self, task_queue=None):
+        self.task_queue = task_queue
         return
 
     def run_worker(self):

@@ -2,11 +2,11 @@
 Project: BaseApp. Class: TaskQueue.
 
 DONE: Add a Queue attribute.
-TODO: Add a TaskQueue.get_task() method.
-TODO: Add a Worker.task_queue attribute.
-TODO: Add a Main.task_queue attribute.
-TODO: Add a task_queue argument to Main.__init_().
+DONE: Add a TaskQueue.get_task() method.
+DONE: Add a Main.task_queue attribute.
+DONE: Add a task_queue argument to Main.__init_().
  - task_queue=False.
+TODO: Add a Worker.task_queue attribute.
 TODO: Add Worker.task_queue setting in Main.register_worker.
  - if task_queue==True set Main.task_queue = TaskQueue().
  - if task_queue==True set Worker.task_queue attribute.

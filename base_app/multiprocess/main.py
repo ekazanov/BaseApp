@@ -13,11 +13,12 @@ import time
 from base_app.multiprocess.message_receiver import MessageReceiver
 from base_app.multiprocess.message_router import MessageRouter
 from base_app.multiprocess.signal_utils import ExitSignalReceiver
+from base_app.multiprocess.task_queue import TaskQueue
 
 
 class Main(object):
 
-    def __init__(self, check_workers=False):
+    def __init__(self, check_workers=False, task_queue=False):
         self.main_loop_sleep_time = 0.01
         self.worker_arr = []
         self.worker_to_check_arr = []
@@ -28,6 +29,10 @@ class Main(object):
         self._exit_flag = False
         self.name = "main"
         self.msg_router.register_receiving_object(receiving_object=self)
+        if task_queue:
+            self.task_queue = TaskQueue()
+        else:
+            self.task_queue = None
 
     def register_worker(self, worker=None):
         self.worker_arr.append(worker)
