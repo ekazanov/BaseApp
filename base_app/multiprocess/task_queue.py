@@ -4,7 +4,6 @@ Project: BaseApp. Class: TaskQueue.
 TODO: Add a Queue attribute.
 TODO: Add a TaskQueue.get_task() method.
 TODO: Add a Worker.task_queue attribute.
-TODO: Design the rest of the task_queue processing.
 TODO: Add a Main.task_queue attribute.
 TODO: Add a task_queue argument to Main.__init_().
  - task_queue=False.
