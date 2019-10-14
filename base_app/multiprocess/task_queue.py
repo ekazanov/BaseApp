@@ -32,3 +32,11 @@ class TaskQueue(object):
         """
         self.task_queue = Queue()
 
+    def get_task(self):
+        """Get task from the self.task_queue queue.
+        """
+        try:
+            task = self.task_queue.get(block=False)
+        except Empty:
+            return None
+        return task
