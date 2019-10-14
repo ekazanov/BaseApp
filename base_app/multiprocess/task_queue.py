@@ -3,8 +3,15 @@ Project: BaseApp. Class: TaskQueue.
 
 TODO: Add a Queue attribute.
 TODO: Add a TaskQueue.get_task() method.
-TODO: Add a Worker.task_queue attribute
+TODO: Add a Worker.task_queue attribute.
 TODO: Design the rest of the task_queue processing.
+TODO: Add a Main.task_queue attribute.
+TODO: Add a task_queue argument to Main.__init_().
+ - task_queue=False.
+TODO: Add Worker.task_queue setting in Main.register_worker.
+ - if task_queue==True set Main.task_queue = TaskQueue().
+ - if task_queue==True set Worker.task_queue attribute.
+TODO: Add TaskQueue section to READMR
 """
 
 from multiprocessing import Queue
