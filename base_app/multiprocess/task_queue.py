@@ -11,6 +11,7 @@ TODO: Add Worker.task_queue setting in Main.register_worker.
  - if task_queue==True set Main.task_queue = TaskQueue().
  - if task_queue==True set Worker.task_queue attribute.
 TODO: Add TaskQueue section to READMR
+TODO: Add an example for the TaskQueue.
 """
 
 from multiprocessing import Queue
