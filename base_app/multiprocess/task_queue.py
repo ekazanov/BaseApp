@@ -1,7 +1,7 @@
 """
 Project: BaseApp. Class: TaskQueue.
 
-TODO: Add a Queue attribute.
+DONE: Add a Queue attribute.
 TODO: Add a TaskQueue.get_task() method.
 TODO: Add a Worker.task_queue attribute.
 TODO: Add a Main.task_queue attribute.
@@ -30,4 +30,5 @@ class TaskQueue(object):
     def __init__(self, ):
         """
         """
-        pass
+        self.task_queue = Queue()
+
