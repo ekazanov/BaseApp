@@ -1,6 +1,13 @@
 -*- mode: change-log -*-
 
-2019-09-08 Evgeny Kazanov <evgeny.kazanov@iproov.com>
+2019-10-12  Evgeny Kazanov  <evgeny.kazanov@iproov.com>
+
+	* v0.2.0
+	- Python2/3 compatibility
+
+
+2019-09-08  Evgeny Kazanov  <evgeny.kazanov@iproov.com>
+
 	* v0.1.0
 	Features:
 	- class Main.
