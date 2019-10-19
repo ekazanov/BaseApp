@@ -41,3 +41,7 @@ class TaskQueue(object):
         except Empty:
             return None
         return task
+
+    def send_task(self, task):
+        self.task_queue.put(task)
+        return
