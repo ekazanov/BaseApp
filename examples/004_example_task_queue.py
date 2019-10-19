@@ -27,7 +27,7 @@ class UserWorker(Worker):
         self.main_loop_sleep_time = .1
         
     def worker_action(self):
-        task = self.task_queue.get_task()
+        task = self.msg_router.task_queue.get_task()
         if task is None:
             return None
         result = self.do_task(task[0], task[1])

@@ -31,6 +31,7 @@ class Main(object):
         self.msg_router.register_receiving_object(receiving_object=self)
         if task_queue:
             self.task_queue = TaskQueue()
+            self.msg_router.register_task_queue(task_queue=self.task_queue)
         else:
             self.task_queue = None
 
@@ -38,7 +39,7 @@ class Main(object):
         self.worker_arr.append(worker)
         worker.set_main_input_q(main_input_q=self.msg_receiver.in_q)
         worker.set_msg_router(self.msg_router)
-        worker.set_task_queue(task_queue=self.task_queue)
+        # worker.set_task_queue(task_queue=self.task_queue)
         self.msg_router.register_receiving_object(receiving_object=worker)
         if self.check_workers:
             self.worker_to_check_arr.append(worker)

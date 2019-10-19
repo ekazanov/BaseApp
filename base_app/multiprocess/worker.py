@@ -28,7 +28,6 @@ class Worker(object):
         self._exit_flag = False
         self.msg_receiver.register_handler(message_type="exit",
                                            message_handler=self._exit)
-        self.task_queue = None
 
     def set_main_input_q(self, main_input_q=None):
         self.main_input_q = main_input_q
@@ -38,15 +37,11 @@ class Worker(object):
         self.msg_router = msg_router
         return
 
-    def set_task_queue(self, task_queue=None):
-        self.task_queue = task_queue
-        return
-
     def run_worker(self):
-        if self.task_queue:
+        if self.msg_router.task_queue:
             args = (self.main_input_q,
                     self.msg_receiver.in_q,
-                    self.task_queue.task_queue)
+                    self.msg_router.task_queue)
         else:
             args = (self.main_input_q,
                     self.msg_receiver.in_q,
@@ -64,8 +59,8 @@ class Worker(object):
         # Redefine queues after a fork
         self.main_input_q = main_input_q
         self.msg_receiver.in_q = msg_receiver_in_q
-        if self.task_queue:
-            self.task_queue.task_queue = task_queue
+        if self.msg_router.task_queue:
+            self.msg_router.task_queue = task_queue
         while not self._exit_flag:
             self.worker_action()
             self.msg_receiver.get_messages()
