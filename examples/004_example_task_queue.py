@@ -32,7 +32,7 @@ class UserWorker(Worker):
             return None
         result = self.do_task(task[0], task[1])
         print("Worker_name={}, a = {}, b = {}, result = {}".format(
-            self.name, result, task[0], task[1]))
+            self.name, task[0], task[1], result))
         return True
 
     def do_task(self, a, b):
@@ -43,13 +43,23 @@ class UserMain(Main):
 
     def __init__(self, *args, **kwargs):
         self.timer_1 = Timer(interval=1)
-        self.sec_cnt = 0
-        self.timer_2 = Timer(interval=2)
-        self.timer_3_5 = Timer(interval=3.5)
+        self.timer_2_5 = Timer(interval=2.5)
         super(UserMain, self).__init__(*args, **kwargs)
 
     def main_action(self):
-        
+        if self.timer_1.check_timer():
+            print("----- Timer 1 -----")
+            self.msg_router.task_queue.send_task([1, 4])
+            self.msg_router.task_queue.send_task([2, 6])
+            self.msg_router.task_queue.send_task([3, 8])
+            self.msg_router.task_queue.send_task([4, 9])
+            self.msg_router.task_queue.send_task([5, 11])
+            self.msg_router.task_queue.send_task([6, 13])
+        if self.timer_2_5.check_timer():
+            print("----- Timer2.5 -----")
+            self.msg_router.task_queue.send_task([21, 9])
+            self.msg_router.task_queue.send_task([23, 11])
+            self.msg_router.task_queue.send_task([25, 13])
         return
 
 
