@@ -11,7 +11,7 @@ DONE: Add Worker.task_queue setting in Main.register_worker.
  - if task_queue==True set Main.task_queue = TaskQueue().
  - set Worker.task_queue attribute.
 TODO: Develop sending a task using MessageRouter
-TODO: Add TaskQueue section to READMR
+TODO: Add TaskQueue section to README
 TODO: Add an example for the TaskQueue.
 TODO: Task should be sent to TaskQueue using MessageRouter.
 """

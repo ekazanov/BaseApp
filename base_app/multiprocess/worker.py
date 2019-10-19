@@ -43,9 +43,14 @@ class Worker(object):
         return
 
     def run_worker(self):
-        args = (self.main_input_q,
-                self.msg_receiver.in_q,
-                self.task_queue.task_queue)
+        if self.task_queue:
+            args = (self.main_input_q,
+                    self.msg_receiver.in_q,
+                    self.task_queue.task_queue)
+        else:
+            args = (self.main_input_q,
+                    self.msg_receiver.in_q,
+                    None)
         self.proc = Process(target=self._main_loop, args=args)
         self.proc.start()
         return self.proc
@@ -59,7 +64,8 @@ class Worker(object):
         # Redefine queues after a fork
         self.main_input_q = main_input_q
         self.msg_receiver.in_q = msg_receiver_in_q
-        self.task_queue.task_queue = task_queue
+        if self.task_queue:
+            self.task_queue.task_queue = task_queue
         while not self._exit_flag:
             self.worker_action()
             self.msg_receiver.get_messages()

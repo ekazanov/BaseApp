@@ -3,6 +3,8 @@
 """
 The BaseApp multiprocess application example.
 
+TaskQueue usage.
+
 Exit using Ctrl-C.
 """
 
