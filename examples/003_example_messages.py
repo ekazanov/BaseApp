@@ -4,9 +4,9 @@
 The BaseApp multiprocess application example.
 Run main class and two workers.
 
-Run main process and two worker processes. 
+Run main process and two worker processes.
 
-main process sends messages to workers.
+main process sends messages to workers. Worker01 sends messages to main.
 
 Exit using Ctrl-C.
 """
@@ -45,16 +45,26 @@ class UserWorker02(Worker):
     def __init__(self, *args, **kwargs):
         super(UserWorker02, self).__init__(*args, **kwargs)
         self.main_loop_sleep_time = .1
+        self.timer_1 = Timer(interval=1)
         self.msg_receiver.register_handler(
             message_type="print",
             message_handler=self._msg_handl_print_msg)
 
     def worker_action(self):
+        if self.timer_1.check_timer():
+            self._send_message_to_main()
         return
 
     def _msg_handl_print_msg(self, msg_body=None):
         print("PID: {}; Worker: {}; Message: {}".format(
             os.getpid(), self.name, msg_body))
+        return
+
+    def _send_message_to_main(self):
+        self.msg_router.send_message(
+            receiving_object_name="main",
+            message_type="print",
+            message_body="Message from Worker_01 to main")
         return
 
 class UserMain(Main):
@@ -65,6 +75,9 @@ class UserMain(Main):
         self.timer_2 = Timer(interval=2)
         self.timer_3_5 = Timer(interval=3.5)
         super(UserMain, self).__init__(*args, **kwargs)
+        self.msg_receiver.register_handler(
+            message_type="print",
+            message_handler=self._msg_handl_print_msg)
 
     def main_action(self):
         if self.timer_1.check_timer():
@@ -92,9 +105,12 @@ class UserMain(Main):
             message_body="Message from Main to Worker_02")
         return
 
+    def _msg_handl_print_msg(self, msg_body=None):
+        print("Main. Message received: {}".format(msg_body))
+
 print(__doc__)
 time.sleep(1)
-    
+
 main = UserMain()
 main.main_loop_sleep_time = 0.1
 worker = UserWorker01(name='Worker_01')

@@ -63,6 +63,7 @@ class Main(object):
     def _main_loop(self):
         while True:
             self.main_action()
+            self.msg_receiver.get_messages()
             # Exit by signal
             if self.exit_signal_receiver.exit_flag:
                 break
