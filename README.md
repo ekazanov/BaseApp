@@ -7,9 +7,13 @@ Author: Evgeny Kazanov
 
 # Introduction #
 
-The BaseApp is a simple library/framework. The main goal of it is to
-provide a base functionality for the multiprocessing python
-application.
+The BaseApp is a simple library/framework. The
+
+The main goal of it is to provide a set of tools for python
+application creating.
+
+Probably in the future it will contain different modules. At the
+moment the multiprocessing module is nearly ready.
 
 # Features #
 
@@ -36,7 +40,7 @@ See 004_example_messages.py file.
   * Develop a message handling methods (Optional).
   * Develop an __init__() method.
     * Register message handling methods.
-  
+
 ## Define UserMain class ##
 
   * Develop a main_action() method.
