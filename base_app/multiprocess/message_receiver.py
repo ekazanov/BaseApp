@@ -28,10 +28,6 @@ class MessageReceiver(object):
         self.message_handler_d[message_type] = message_handler
         return
 
-    def route_message(self, message):
-        self.message_handler_d[message["type"]](message["body"])
-        return
-
     def _get_message(self):
         try:
             msg_type, msg_body = self.in_q.get(block=False)
