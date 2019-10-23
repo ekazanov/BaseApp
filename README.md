@@ -21,7 +21,7 @@ such applications have the following advantages:
     * The good multiprocessing application is much more reliable.
     * It reduces application complexity.
     * It resolves the famous GIL problem.
-    * It allows use few frameworks with event loops in separate processes.
+    * It allows to use few frameworks with event loops in the separate processes.
 
 # Features #
 
@@ -83,5 +83,11 @@ The multiprocessing module allows to develop following architectures:
 ### Message routing ###
 
 ### Message handlers ###
+
+=======
+    1) The main process and the number of the different workers.
+      Main process and workers can send messages to each other.
+    2) The main process and the number of the identical workers.
+      The workers take tasks from the task queue and work on tasks.
 
 # Usage #
