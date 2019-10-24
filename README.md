@@ -64,13 +64,41 @@ The multiprocessing module allows to develop following architectures:
   1. The `main._run_workers()` method is called. It starts the worker
      processes.
   2. The `main._main_loop_workers()` method is called. In the loop:
+
     1. The `main._main_action()` method is called. It is defined in
        UserMain class. The Main background actions happen here.
     2. The `main.msg_receiver.get_messages()` method is called. It
        receives messages if there are any. For every message the
        message handler is called.
+    3. The exit flag is processed. If it is true exit from the loop.
 
-## Worker process Life cycle ##
+  3. Call `self._exit_workers()` It sends exit message to the workers.
+  4. Wait when all workers are finished.
+  5. Exit.
+
+## Worker process life cycle ##
+
+  **Note:** In this section the classes are reffered as:
+
+  - `Worker` - `base_app.multiprocess.worker.Worker` class
+  - `UserWorker` - The developer's worker class which inherits from
+    the `base_app.multiprocess.worker.Worker` class.
+
+  **Life cycle:**
+
+  1. In the `User.__init__()` method the message handlers are
+     registered.
+  2. The `User.run_worker()` starts the worker process. The worker
+     process runs as an User._main_loop() method. In it:
+
+        1. Call UserWorker.worker_action():
+           1. If the application is designed as a *task queue
+           application* get task from task queue (See
+           004_example_task_queue.py). Do task.
+           2. Get messages and call message handlers.
+           3. Check Worker._exit_flag
+
+        2. return - exit from the worker process.
 
 ### Blocking/non blocking mode ###
 
