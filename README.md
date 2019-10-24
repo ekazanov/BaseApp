@@ -93,3 +93,5 @@ The multiprocessing module allows to develop following architectures:
 # Usage #
 
 ## Class development ##
+
+One should develop Main class and Worker classes.
