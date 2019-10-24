@@ -91,3 +91,5 @@ The multiprocessing module allows to develop following architectures:
       The workers take tasks from the task queue and work on tasks.
 
 # Usage #
+
+## Class development ##
