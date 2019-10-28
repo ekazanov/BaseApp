@@ -140,11 +140,25 @@ following:
 self.msg_router.task_queue.send_task(<task message object>)
 ```
 
+To receive the task message in a `UserWorker.main_action()`
+`get_task()` method should be colled like this:
+
+```python
+    def worker_action(self):
+        task = self.msg_router.task_queue.get_task()
+        if task is None:
+            return None
+```
+
+The `self.msg_router.task_queue.get_task()` method returns a `<task
+message object>` which was sent by sender.
+
 ### Message routing ###
 
 #### Object messages ####
 
-Every worker process and main process has an 
+Every worker process and main process has a MessageReceiver attribute
+which has an input queue and get_messages() method.
 
 Object messages are sent to the corresponded object input 
 
