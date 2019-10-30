@@ -76,11 +76,15 @@ The multiprocessing module allows to develop following architectures:
 
 ## Worker process life cycle ##
 
-  **Note:** In this section the classes are reffered as:
+  **Note 1:** In this section the classes are reffered as:
 
   - `Worker` - `base_app.multiprocess.worker.Worker` class
   - `UserWorker` - The developer's worker class which inherits from
     the `base_app.multiprocess.worker.Worker` class.
+
+  **Note 2:**
+
+  - Every `Worker` object starts a corresponded worker process.
 
   **Life cycle:**
 
@@ -157,12 +161,27 @@ message object>` which was sent by sender.
 
 #### Object messages ####
 
-Every worker process and main process has a MessageReceiver attribute
-which has an input queue and get_messages() method.
+Every worker object (and process) and main process has a
+MessageReceiver attribute which has an input queue and get_messages()
+method.
 
-Object messages are sent to the corresponded object input 
+Every worker object (and process) and main process has a MessageRouter
+attribute. The message to the other object can be sent using a
+MessageRouter.send_message() method.
 
-#### Task messages ####
+Object messages are sent to the corresponded object like this:
+
+```python
+    self.msg_router.send_message(
+        receiving_object_name="<object name>",
+        message_type="<message type>",
+        message_body="message body")
+```
+
+The MessageRouter find the adderssed object using a
+`MessageRouter.message_route_d` dictionary. The object receives
+message it's input queue. The objects finds the message handler using
+`message_type` message field and call the message handler.
 
 #### Exit messages ####
 
