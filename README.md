@@ -185,6 +185,11 @@ message it's input queue. The objects finds the message handler using
 
 #### Exit messages ####
 
+Every worker process the exit message. When the worker receives the
+exit message it exits. The exit messages are sent to workers by the
+Main.exit() method. So if you call the Main.exit() method it sends the
+exit messages to workers. After that it wait while all workers exit.
+
 ### Message handlers ###
 
 
