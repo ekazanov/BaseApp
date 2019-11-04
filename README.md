@@ -76,7 +76,7 @@ The multiprocessing module allows to develop following architectures:
 
 ## Worker process life cycle ##
 
-  **Note 1:** In this section the classes are reffered as:
+  **Note 1:** In this section the classes are referred as:
 
   - `Worker` - `base_app.multiprocess.worker.Worker` class
   - `UserWorker` - The developer's worker class which inherits from
@@ -97,7 +97,7 @@ The multiprocessing module allows to develop following architectures:
            application* get task from task queue (See
            004_example_task_queue.py). Do task.
         -  If the application is not designed as a *task queue
-           application* the background worker work happends here.
+           application* the background worker work happens here.
     2. Get messages and call message handlers.
     3. Check Worker._exit_flag
     4. return - exit from the worker process.
@@ -129,13 +129,13 @@ Where:
 
  - `<object_name>` - Receiving object name attribute
    (str). `receiving_object.name`
- - `<message type>` - Sring with message type. The message type is
+ - `<message type>` - String with message type. The message type is
    used as a key for message handler call.
  - `<message body>` - Any python object which can be pickled.
 
 ### Task messages ###
 
-The task message type can be of the any pickleable python type.
+The task message type can be of the any pickle-able python type.
 
 Task message is sent using the `TaskQueue.send_task()` method like
 following:
@@ -145,7 +145,7 @@ self.msg_router.task_queue.send_task(<task message object>)
 ```
 
 To receive the task message in a `UserWorker.main_action()`
-`get_task()` method should be colled like this:
+`get_task()` method should be called like this:
 
 ```python
     def worker_action(self):
@@ -185,7 +185,7 @@ Object messages are sent to the corresponded object like this:
         message_body="message body")
 ```
 
-The MessageRouter find the adderssed object using a
+The MessageRouter find the addressed object using a
 `MessageRouter.message_route_d` dictionary. The object receives
 message it's input queue. The objects finds the message handler using
 `message_type` message field and call the message handler.
@@ -237,5 +237,7 @@ In the main script:
 
   - The `main` object is created.
   - The `worker` objects are created.
-  - The `worker` objects are registred in the `main` object.
+  - The `worker` objects are registered in the `main` object.
   - The `main.run()` method is called.
+
+The more details can be found in examples.
