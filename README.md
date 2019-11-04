@@ -20,7 +20,7 @@ such applications have the following advantages:
 
     * The good multiprocessing application is much more reliable.
     * It reduces application complexity.
-    * It resolves the famous GIL problem.
+    * It solves the famous GIL problem.
     * It allows to use few frameworks with event loops in the separate processes.
 
 # Features #
@@ -133,9 +133,9 @@ Where:
    used as a key for message handler call.
  - `<message body>` - Any python object which can be pickled.
 
-### Task message ###
+### Task messages ###
 
-The task message type can be the any pickleable python type.
+The task message type can be of the any pickleable python type.
 
 Task message is sent using the `TaskQueue.send_task()` method like
 following:
@@ -156,6 +156,13 @@ To receive the task message in a `UserWorker.main_action()`
 
 The `self.msg_router.task_queue.get_task()` method returns a `<task
 message object>` which was sent by sender.
+
+#### Exit messages ####
+
+Every worker process the exit message. When the worker receives the
+exit message it exits. The exit messages are sent to workers by the
+Main.exit() method. So if you call the Main.exit() method it sends the
+exit messages to workers. After that it wait while all workers exit.
 
 ### Message routing ###
 
@@ -185,16 +192,50 @@ message it's input queue. The objects finds the message handler using
 
 #### Exit messages ####
 
-Every worker process the exit message. When the worker receives the
-exit message it exits. The exit messages are sent to workers by the
-Main.exit() method. So if you call the Main.exit() method it sends the
-exit messages to workers. After that it wait while all workers exit.
+Exit messages are sent to all workers.
 
 ### Message handlers ###
 
+For the every message type (apart the exit message) which can be sent
+to a worker a developer should develop a message handler. A message
+handler is a UserWorker class method. The message body is passed to a
+message handler as a `message_body` named argument.
+
+The developer should also register a message handler in a
+`UserWorker.__init__()` method.
+
+The message handler examples can be found in `003_example_messages.py`
 
 # Usage #
 
 ## Class development ##
 
-One should develop Main class and Worker classes.
+*Note:* A developer can use any Worker/Main class names but in this
+document the MainWorker and User Worker names are used.
+
+The developer should develop a UserMain class and one or more
+UserWorker classes.
+
+The `UserMain(Main)` class should include:
+
+  - `UserMain.__init__()` which should include:
+    - `super(UserMain, self).__init__()`.
+    - Message handlers registration.
+  - Message handlers.
+  - `UserMain.main_action()` method.
+
+The `UserWorker(Worker)` should include:
+
+  - `UserWorker.__init__()`
+    - `super(UserWorker, self).__init()`
+    - Message handlers registration.
+
+  - Message handlers.
+  - `UserMain.main_action()` method.
+
+In the main script:
+
+  - The `main` object is created.
+  - The `worker` objects are created.
+  - The `worker` objects are registred in the `main` object.
+  - The `main.run()` method is called.
