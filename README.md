@@ -13,7 +13,7 @@ The main goal of it is to provide a set of tools for python
 application creating.
 
 Probably in the future it will contain different modules. At the
-moment the multiprocessing module is nearly ready.
+moment a multiprocessing module is nearly ready.
 
 It can be useful to create the Python multiprocessing applications. The
 such applications have the following advantages:
@@ -21,11 +21,11 @@ such applications have the following advantages:
  * The good multiprocessing application is much more reliable.
  * It reduces application complexity.
  * It solves the famous GIL problem.
- * It allows to use few frameworks with event loops in the separate processes.
+ * It allows using few frameworks with event loops in the separate processes.
 
 # Features #
 
-The multiprocessing module allows to develop following architectures:
+The multiprocessing module allows developing following architectures:
 
  * The main process and the number of the different workers.  Main
       process and workers can send messages to each other.
@@ -69,7 +69,7 @@ The multiprocessing module allows to develop following architectures:
    2. The `main.msg_receiver.get_messages()` method is called. It
       receives messages if there are any. For every message the
       message handler is called.
-   3. The exit flag is processed. If it is true exit from the loop.
+   3. The exit flag is processed. If it is true, exit from the loop.
  3. Call `self._exit_workers()` It sends exit message to the workers.
  4. Wait when all workers are finished.
  5. Exit.
@@ -114,7 +114,7 @@ Message is the python tuple:
 
 `(<message type>, <message body>)`
 
-Message should be send using the `MessageRouter.send_message()` method
+Message should be sent using the `MessageRouter.send_message()` method
 like this:
 
 ```python
@@ -159,9 +159,10 @@ message object>` which was sent by sender.
 #### Exit messages ####
 
 Every worker process the exit message. When the worker receives the
-exit message it exits. The exit messages are sent to workers by the
-Main.exit() method. So if you call the Main.exit() method it sends the
-exit messages to workers. After that it wait while all workers exit.
+exit message, it exits. The exit messages are sent to workers by the
+Main.exit() method. So if you call the Main.exit() method, it sends
+the exit messages to workers. After that it wait, while all workers
+exit.
 
 ### Message routing ###
 
@@ -184,9 +185,9 @@ Object messages are sent to the corresponded object like this:
         message_body="message body")
 ```
 
-The MessageRouter find the addressed object using a
+A MessageRouter find the addressed object using a
 `MessageRouter.message_route_d` dictionary. The object receives
-message it's input queue. The objects finds the message handler using
+message it's input queue. The object finds the message handler using
 `message_type` message field and call the message handler.
 
 #### Exit messages ####
@@ -197,7 +198,7 @@ Exit messages are sent to all workers.
 
 For the every message type (apart the exit message) which can be sent
 to a worker a developer should develop a message handler. A message
-handler is a UserWorker class method. The message body is passed to a
+handler is a UserWorker class method. A message body is passed to a
 message handler as a `message_body` named argument.
 
 The developer should also register a message handler in a
