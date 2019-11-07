@@ -36,30 +36,38 @@ The multiprocessing module allows developing following architectures:
 
 ## Application structure ##
 
- * Develop the UserMain (One can use other class name of course)
-   class which inherits from Main class.
-   * Develop the UserMain.main_action() method.
-   * Develop message handlers in UserMain. They are called for each
-     message arriving to UserMain process.
-   * Register the message handlers in `UserMain.__init__()`
- * Develop the UserWorker (the class name can vary) classes which
-   inherit from Worker class.
-   * Develop the UserWorker.worker_action() method.
-   * Develop message handlers in UserWorker. They are called for each
-     message arriving to UserWorker process.
-   * Register the message handlers in `UserWorker.__init__()`
- * Create and main object, create and register worker objects:
-   *   `main = UserMain()`
-   *   `worker = UserWorker01(name='Worker_01')`
-   *   `main.register_worker(worker=worker)`
-   *   `worker = UserWorker01(name='Worker_02')`
-   *   `main.register_worker(worker=worker)`
- * Start main process:
-   * `main.run()`
+### Messages ###
+
+Message includes three fields:
+
+  * Receiver address (txt) - the name of receiving object.
+  * Message type (txt) - the type of the message handler in receiver.
+  * Message body (any picklable Python object).
+
+### Main process and one or more worker processes ###
+
+The aplication consists of the main process and worker processes. All
+processes have an input queue. Every process can send a message to the
+any other process.
+
+The main process catches either a SIGINT or a SIGTERM signal and
+send exit message to all processes. After receiving an exit message,
+the worker process exits. After all worker processes exited, the main
+process exits too.
+
+### Main process and few workers with task queue ###
+
+The aplication consists of the main process and worker processes. All
+processes have an input queue. Every process can send a message to the
+any other process.
+
+The main process (or the dedicated worker) send tasks to the task
+queue. The worker processes take tasks from the task queue and work on
+it.
 
 ## Main process life cycle ##
 
-  After the start (`main.run()` call):
+After the start (`main.run()` call):
 
  1. The `main._run_workers()` method is called. It starts the worker
     processes.
@@ -78,13 +86,13 @@ The multiprocessing module allows developing following architectures:
 
  **Note 1:** In this section the classes are referred as:
 
- - `Worker` - `base_app.multiprocess.worker.Worker` class
- - `UserWorker` - The developer's worker class which inherits from
+ * `Worker` - `base_app.multiprocess.worker.Worker` class
+ * `UserWorker` - The developer's worker class which inherits from
    the `base_app.multiprocess.worker.Worker` class.
 
  **Note 2:**
 
- - Every `Worker` object starts a corresponded worker process.
+ * Every `Worker` object starts a corresponded worker process.
 
  **Life cycle:**
 
@@ -93,11 +101,12 @@ The multiprocessing module allows developing following architectures:
  2. The `User.run_worker()` starts the worker process. The worker
     process runs as an User._main_loop() method. In it:
    1. Call UserWorker.worker_action():
-       - (Optional) If the application is designed as a *task queue
+       * (Optional) If the application is designed as a *task queue
           application* get task from task queue (See
           004_example_task_queue.py). Do task.
-       -  If the application is not designed as a *task queue
-          application* the background worker work happens here.
+       * If the application is
+          not designed as a *task queue application* the background
+          worker work happens here.
    2. Get messages and call message handlers.
    3. Check Worker._exit_flag
    4. return - exit from the worker process.
@@ -126,11 +135,11 @@ self.msg_router.send_message(
 
 Where:
 
- - `<object_name>` - Receiving object name attribute
+ * `<object_name>` - Receiving object name attribute
    (str). `receiving_object.name`
- - `<message type>` - String with message type. The message type is
+ * `<message type>` - String with message type. The message type is
    used as a key for message handler call.
- - `<message body>` - Any python object which can be pickled.
+ * `<message body>` - Any python object which can be pickled.
 
 ### Task messages ###
 
@@ -218,26 +227,26 @@ UserWorker classes.
 
 The `UserMain(Main)` class should include:
 
-  - `UserMain.__init__()` which should include:
-    - `super(UserMain, self).__init__()`.
-    - Message handlers registration.
-  - Message handlers.
-  - `UserMain.main_action()` method.
+  * `UserMain.__init__()` which should include:
+    * `super(UserMain, self).__init__()`.
+    * Message handlers registration.
+  * Message handlers.
+  * `UserMain.main_action()` method.
 
 The `UserWorker(Worker)` should include:
 
-  - `UserWorker.__init__()`
-    - `super(UserWorker, self).__init()`
-    - Message handlers registration.
+  * `UserWorker.__init__()`
+    * `super(UserWorker, self).__init()`
+    * Message handlers registration.
 
-  - Message handlers.
-  - `UserMain.main_action()` method.
+  * Message handlers.
+  * `UserMain.main_action()` method.
 
 In the main script:
 
-  - The `main` object is created.
-  - The `worker` objects are created.
-  - The `worker` objects are registered in the `main` object.
-  - The `main.run()` method is called.
+  * The `main` object is created.
+  * The `worker` objects are created.
+  * The `worker` objects are registered in the `main` object.
+  * The `main.run()` method is called.
 
 The more details can be found in examples.
