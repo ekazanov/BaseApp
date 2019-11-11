@@ -20,9 +20,10 @@ class MessageReceiver(object):
         <msg_body> - any valid Python type.
     """
 
-    def __init__(self):
+    def __init__(self, block=False):
         self.message_handler_d = {}
         self.in_q = Queue()
+        self.block = block
 
     def register_handler(self, message_type=None, message_handler=None):
         self.message_handler_d[message_type] = message_handler
@@ -30,7 +31,7 @@ class MessageReceiver(object):
 
     def _get_message(self):
         try:
-            msg_type, msg_body = self.in_q.get(block=False)
+            msg_type, msg_body = self.in_q.get(block=self.block)
         except Empty:
             return (None, None)
         return (msg_type, msg_body)
