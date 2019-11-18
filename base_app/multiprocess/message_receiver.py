@@ -37,6 +37,12 @@ class MessageReceiver(object):
         return (msg_type, msg_body)
 
     def get_messages(self):
+        # In blocking mode get one message.
+        if self.block:
+            msg_type, msg_body = self._get_message()
+            self.message_handler_d[msg_type](msg_body)
+            return
+        # Get all messages in non blocking mode.
         while True:
             msg_type, msg_body = self._get_message()
             if (msg_type, msg_body) == (None, None):

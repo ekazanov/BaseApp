@@ -27,7 +27,7 @@ class UserWorker01(Worker):
 
     def __init__(self, *args, **kwargs):
         super(UserWorker01, self).__init__(*args, **kwargs)
-        self.main_loop_sleep_time = .1
+        # self.main_loop_sleep_time = .1
         self.msg_receiver.register_handler(
             message_type="print",
             message_handler=self._msg_handl_print_msg)
@@ -92,7 +92,7 @@ class UserMain(Main):
     def _send_msg_to_worker_01(self):
         print("Main: Send message from Main to Worker_01")
         self.msg_router.send_message(
-            receiving_object_name="Worker_01",
+            receiving_object_name="Worker_01_blocking_msg_reading",
             message_type="print",
             message_body="Message from Main to Worker_01")
         return
@@ -113,7 +113,7 @@ time.sleep(1)
 
 main = UserMain()
 main.main_loop_sleep_time = 0.1
-worker = UserWorker01(name='Worker_01')
+worker = UserWorker01(name='Worker_01_blocking_msg_reading', block=True)
 main.register_worker(worker=worker)
 worker = UserWorker02(name='Worker_02')
 main.register_worker(worker=worker)

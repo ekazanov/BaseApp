@@ -15,12 +15,15 @@ from base_app.multiprocess.message_receiver import MessageReceiver
 
 class Worker(object):
 
-    def __init__(self, name=None):
-        self.main_loop_sleep_time = 0.01
+    def __init__(self, name=None,  block=False):
+        if block:
+            self.main_loop_sleep_time = None
+        else:
+            self.main_loop_sleep_time = 0.01
         self.proc = None
         self.name = name
         self.main_input_q = None
-        self.msg_receiver = MessageReceiver()
+        self.msg_receiver = MessageReceiver(block=block)
         self.msg_router = None
         """The MessageRouter object is added during the Worker registration in
         Main class object.
@@ -64,7 +67,8 @@ class Worker(object):
         while not self._exit_flag:
             self.worker_action()
             self.msg_receiver.get_messages()
-            time.sleep(self.main_loop_sleep_time)
+            if not self.main_loop_sleep_time is None:
+                time.sleep(self.main_loop_sleep_time)
         return
 
     def _exit(self, msg_data):
